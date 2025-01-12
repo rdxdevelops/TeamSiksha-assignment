@@ -231,6 +231,35 @@ dialog {
 	margin: 0;
 	max-width: 90vw;
 	max-height: 90vh;
+	padding: 20px;
+	border-radius: 8px;
+	border: 1px solid #ccc;
+	width: 90%;
+	max-width: 500px;
+}
+
+@media screen and (max-width: 480px) {
+	dialog {
+		width: 95%;
+		padding: 15px;
+		margin: 10px;
+	}
+
+	dialog textarea {
+		width: 100%;
+		min-height: 100px;
+	}
+
+	.dialog-buttons {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+
+	.dialog-buttons button {
+		width: 100%;
+		padding: 12px;
+	}
 }
 
 dialog::backdrop {
