@@ -19,3 +19,17 @@ Backend developers are tasked with creating API endpoints based on the event dat
 - **Update Description**: Update the description of an event based on its slug.
 
 # Try to follow the best practices you know. Time limit: 2 hours.
+
+# submission by @tejs1
+
+# how to run the project
+
+1. clone the repo
+2. cd 'Assignment 12 Jan Twitter live'
+3. run `npm install`
+4. run `npm start`
+5. open `http://localhost:3000` in your browser
+
+# live demo
+
+[join-team-shiksha.onrender.com](https://join-team-shiksha.onrender.com/)
