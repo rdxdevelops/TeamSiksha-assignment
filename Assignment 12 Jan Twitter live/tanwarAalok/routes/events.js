@@ -2,6 +2,8 @@ const express = require('express');
 const {readData, errorHandler, writeData} = require("../utils/helper");
 const router = express.Router();
 
+const ITEMS_PER_PAGE = 10;
+
 router.get('/get/:slug', async (req, res, next) => {
     try {
         const events = await readData();
@@ -26,7 +28,8 @@ router.get('/get/:slug', async (req, res, next) => {
 // Search events by title or description
 router.get('/search', async (req, res, next) => {
     try {
-        const { query } = req.query;
+        const { query, page = 1 } = req.query;
+        const currentPage = parseInt(page, 10);
 
         if (!query) {
             return res.status(400).json({
@@ -35,8 +38,15 @@ router.get('/search', async (req, res, next) => {
             });
         }
 
+        if (currentPage < 1) {
+            return res.status(400).json({
+                status: 'error',
+                message: 'Page number must be greater than 0'
+            });
+        }
+
         const events = await readData();
-        const searchResults = events.filter(event => {
+        const filteredEvents = events.filter(event => {
             if (event.deleted) return false;
 
             const searchTerm = query.toLowerCase();
@@ -46,9 +56,26 @@ router.get('/search', async (req, res, next) => {
             );
         });
 
+        const totalItems = filteredEvents.length;
+        const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+        const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+        const endIndex = startIndex + ITEMS_PER_PAGE;
+
+        const paginatedEvents = filteredEvents.slice(startIndex, endIndex);
+
         res.json({
             status: 'success',
-            data: searchResults
+            data: {
+                events: paginatedEvents,
+                pagination: {
+                    currentPage,
+                    totalPages,
+                    totalItems,
+                    itemsPerPage: ITEMS_PER_PAGE,
+                    hasNextPage: currentPage < totalPages,
+                    hasPreviousPage: currentPage > 1
+                }
+            }
         });
     } catch (error) {
         next(error);
