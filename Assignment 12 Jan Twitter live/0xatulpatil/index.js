@@ -51,8 +51,8 @@ app.delete("/slug/:slugid", (req, res) => {
 
 // Search through slugs
 app.post("/search", (req, res) => {
-	const titleToSearch = req.body.title;
-	const result = searchForText(titleToSearch, db);
+	const textToSearch = req.body.text;
+	const result = searchForText(textToSearch, db);
 	res.status(200).send(result);
 });
 
