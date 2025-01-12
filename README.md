@@ -17,3 +17,7 @@ Assignments for joining the https://team.shiksha/ projects can be found [here](.
 3. run `npm install`
 4. run `npm start`
 5. open `http://localhost:3000` in your browser
+
+# live demo
+
+[join-team-shiksha.onrender.com](https://join-team-shiksha.onrender.com/)
