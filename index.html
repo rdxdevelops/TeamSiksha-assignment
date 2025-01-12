@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Manager</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .event-card {
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+      margin: 10px 0;
+      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      margin: 10px 0;
+    }
+    #pagination-controls button {
+      margin: 0 5px;
+      padding: 5px 10px;
+      border: none;
+      background: #007bff;
+      color: white;
+      cursor: pointer;
+    }
+    #pagination-controls button.active {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h1>Event Manager</h1>
+
+  <!-- Search and Sort Controls -->
+  <div class="controls">
+    <input type="text" id="search-input" placeholder="Search by title...">
+    <select id="sort-select">
+      <option value="asc">Sort by Date (Ascending)</option>
+      <option value="desc">Sort by Date (Descending)</option>
+    </select>
+  </div>
+
+  <!-- Event Container -->
+  <div id="event-container"></div>
+
+  <!-- Pagination Controls -->
+  <div id="pagination-controls"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
