@@ -15,6 +15,9 @@ async function getData() {
   );
 }
 
+function formatDateTime(dateString) {
+  return new Date(dateString).toLocaleString();
+}
 function reenderedEvents() {
   const inputValue = document.getElementById("search").value.toLowerCase();
   let fileteredEvents = events.filter((event) =>
@@ -35,10 +38,52 @@ function reenderedEvents() {
     return sortDirection === "asc" ? dateA - dateB : dateB - dateA;
   });
   //   console.log(sorted);
+
+  const start = (currentPage - 1) * eventsPerPage;
+  const paginatedEvents = fileteredEvents.slice(start, start + eventsPerPage);
+
+  const eventsContainer = document.getElementById("eventsList");
+  eventsContainer.innerHTML = paginatedEvents
+    .map(
+      (event) => `
+      <div class="event-card">
+          <h2 class="event-title">${event.title}</h2>
+          <p class="event-description">${event.description}</p>
+          <div class="event-time">
+              <p>Created: ${formatDateTime(event.created)}</p>
+              <p>Starts: ${formatDateTime(event.startTime)}</p>
+              <p>Ends: ${formatDateTime(event.endTime)}</p>
+          </div>
+      </div>
+  `
+    )
+    .join("");
+
+  renderPagination(fileteredEvents.length);
+}
+
+function renderPagination(totalEvents) {
+  const totalPages = Math.ceil(totalEvents / eventsPerPage);
+  const paginationContainer = document.getElementById("pagination");
+
+  let paginationHTML = "";
+  for (let i = 1; i <= totalPages; i++) {
+    paginationHTML += `
+            <button class="page-button ${currentPage === i ? "active" : ""}"
+                    onclick="changePage(${i})">${i}</button>
+        `;
+  }
+
+  paginationContainer.innerHTML = paginationHTML;
+}
+
+function changePage(page) {
+  currentPage = page;
+  reenderedEvents();
 }
 
 document.getElementById("search").addEventListener("input", () => {
-  fileteredEvents();
+  reenderedEvents();
 });
 document.getElementById("sortButton").addEventListener("click", () => {
   sortDirection = sortDirection === "asc" ? "desc" : "asc";
