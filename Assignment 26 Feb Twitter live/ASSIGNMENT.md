@@ -1,5 +1,7 @@
 # Assignment 26th Feb Twitter live
 
+Dead line 2 hours by 11:15 PM.
+
 Submit the PR after 11 PM to prevent others from copying your assignment.
 
 ## Frontend Development
