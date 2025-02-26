@@ -1,5 +1,7 @@
 # Assignment 26th Feb Twitter live
 
+Submit the PR after 11 PM to prevent others from copying your assignment.
+
 ## Frontend Development
 
 Create a user interface for the book data available [here](./books.json). Your interface should:
